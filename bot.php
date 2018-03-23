@@ -1,7 +1,11 @@
 <?php 
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('KpFfecrkMgy+VLpBQqBeIZb+PqzvlGwmUlWQj738u8jczoc8iSPxmbegJMq9EZK0B/DylvOS+qW+osZW1N+SVWOeiGzlPUGNRVBKRk6CQhVi39+t7fQksFdJL4vOCgHUYWzN/2AsgdkuPNzEgBqFSQdB04t89/1O/w1cDnyilFU=');
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '28852c03308a7c267b67b3e9170a9602']);
-$response = $bot->replyText('<reply token>', 'hello!');
+
+$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+$response = $bot->replyMessage('<replyToken>', $textMessageBuilder);
+
+echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 // $access_token = 'KpFfecrkMgy+VLpBQqBeIZb+PqzvlGwmUlWQj738u8jczoc8iSPxmbegJMq9EZK0B/DylvOS+qW+osZW1N+SVWOeiGzlPUGNRVBKRk6CQhVi39+t7fQksFdJL4vOCgHUYWzN/2AsgdkuPNzEgBqFSQdB04t89/1O/w1cDnyilFU=';
 // // Get POST body content
 // $content = file_get_contents('php://input');
