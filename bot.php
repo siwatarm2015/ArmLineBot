@@ -72,13 +72,15 @@ if ($response->isSucceeded()) {
 	// ส่วนของคำสั่งจัดเตียมรูปแบบข้อความสำหรับส่ง
 	$textMessageBuilder = new TextMessageBuilder('Hello'.$username);
     $reply = $bot->replyMessage($replyToken,$textMessageBuilder);
-}
 
-
- if ($reply->isSucceeded()) {
+    if ($reply->isSucceeded()) {
  	echo "Success";
- }else{
-// Failed
-echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+	 }else{
+	// Failed
+	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+	}
 }
+
+
+
 ?>
