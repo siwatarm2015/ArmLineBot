@@ -61,16 +61,24 @@ if(!is_null($events)){
     // ถ้ามีค่า สร้างตัวแปรเก็บ replyToken ไว้ใช้งาน
     $replyToken = $events['events'][0]['replyToken'];
 }
-// ส่วนของคำสั่งจัดเตียมรูปแบบข้อความสำหรับส่ง
-$textMessageBuilder = new TextMessageBuilder(json_encode($events));
  
 //l ส่วนของคำสั่งตอบกลับข้อความ
-$response = $bot->replyMessage($replyToken,$textMessageBuilder);
+$response = $bot->getProfile('<userId>');
+	
 if ($response->isSucceeded()) {
-    echo 'Succeeded!';
-    return;
+	$profile = $response->getJSONDecodedBody();
+	$username = $profile['displayName'];
+
+	// ส่วนของคำสั่งจัดเตียมรูปแบบข้อความสำหรับส่ง
+	$textMessageBuilder = new TextMessageBuilder('Hello'.$username);
+    $reply = $bot->replyMessage($replyToken,$textMessageBuilder);
 }
- 
+
+
+ if ($reply->isSucceeded()) {
+ 	echo "Success";
+ }else{
 // Failed
 echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+}
 ?>
